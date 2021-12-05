@@ -34,8 +34,8 @@
                 Shop
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                <li><a class="dropdown-item" href="#">Categories</a></li>
-                <li><a class="dropdown-item" href="#">Order Custom</a></li>
+                <li><a class="dropdown-item" href="#">Browse Categories</a></li>
+                <li><a class="dropdown-item" href="#">Order Custom Keyboards</a></li>
               </ul>
             </li>
             <li>
@@ -44,9 +44,18 @@
             <li class="nav-item">
               <a class="nav-link" href="/about">About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/about">Log Out</a>
-            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">Log Out</a>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <a class="nav-link" href=new_user_session_path>Log In</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href=new_user_registration_path>Sign Up</a>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
