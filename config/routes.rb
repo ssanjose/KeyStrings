@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :customers
   root to: "main#index"
 
   get "/about", to: "about#index"
