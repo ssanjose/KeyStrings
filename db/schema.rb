@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_05_074332) do
+ActiveRecord::Schema.define(version: 2021_12_05_074537) do
 
   create_table "provinces", force: :cascade do |t|
     t.string "title"
@@ -20,4 +20,16 @@ ActiveRecord::Schema.define(version: 2021_12_05_074332) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.text "password"
+    t.integer "phone"
+    t.integer "province_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["province_id"], name: "index_users_on_province_id"
+  end
+
+  add_foreign_key "users", "provinces"
 end
