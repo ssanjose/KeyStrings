@@ -16,14 +16,23 @@
 
   <body>
     <%= render partial: 'shared/navbar' %>
+    <% if flash[:notice] %>
+      <p class="alert-primary p-3"><%= notice %></p>
+    <% else %>
+      <% if flash[:alert] %>
+        <p class="alert-dark p-3"><%= alert %></p>
+      <% end %>
+    <% end %>
 
+    <br>
     <div class="container">
       <%= yield %>
     </div>
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <%= render partial: 'shared/footer' %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
   </body>
 </html>

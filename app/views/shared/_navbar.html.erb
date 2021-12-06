@@ -24,10 +24,10 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/account">Account</a>
+              <%= link_to "Account", edit_user_registration_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/account">Cart</a>
+              <a class="nav-link" aria-current="page" href="#">Cart</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,14 +46,14 @@
             </li>
             <% if user_signed_in? %>
               <li class="nav-item">
-                <a class="nav-link" href="/about">Log Out</a>
+                <%= link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :delete %>
               </li>
             <% else %>
               <li class="nav-item">
-                <a class="nav-link" href=new_user_session_path>Log In</a>
+                <%= link_to "Log In", new_user_session_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href=new_user_registration_path>Sign Up</a>
+                <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
               </li>
             <% end %>
           </ul>
