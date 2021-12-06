@@ -8,9 +8,9 @@ require "csv"
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.delete_all
 Province.delete_all
 Category.delete_all
-User.delete_all
 
 filename = Rails.root.join("db/provinces.csv")
 
@@ -28,3 +28,5 @@ provinces.each do |m|
 end
 
 puts "Created #{Province.count} Provinces"
+
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
