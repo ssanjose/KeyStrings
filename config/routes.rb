@@ -2,8 +2,16 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  # config = ActiveAdmin::Devise.config
+  # config[:controllers][:sessions] = "users/sessions"
+  # config[:controllers][:registrations] = "devise/registrations"
+  # devise_for :users, config
+
   devise_for :users,
-             controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+             path:        "auth",
+             controllers: { sessions: "users/sessions", registrations: "users/registrations" },
+             path_names:  { registration: "register" }
+
   root to: "main#index"
 
   get "/about", to: "about#index"

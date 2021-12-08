@@ -10,4 +10,8 @@ class User < ApplicationRecord
   validates :name, :password, presence: true
   validates :email, uniqueness: true
   validates :phone, numericality: true, length: { minimum: 10, maximum: 15 }
+
+  def admin?
+    :admin == true
+  end
 end
