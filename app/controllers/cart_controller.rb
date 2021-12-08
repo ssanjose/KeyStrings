@@ -1,4 +1,6 @@
 class CartController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def index
     @items = Item.find(session[:shopping_cart])
   end

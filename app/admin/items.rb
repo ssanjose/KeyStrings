@@ -11,7 +11,8 @@ ActiveAdmin.register Item do
     f.inputs
 
     f.inputs do
-      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image) : ""
+      f.input :picture, as:   :file,
+                        hint: f.object.picture.present? ? image_tag(f.object.picture) : ""
     end
     f.actions
   end
