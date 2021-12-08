@@ -1,0 +1,51 @@
+// Place all the styles related to the Items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#items aside {
+  border: 1px solid var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow) var(--color-shadow);
+  margin: 1rem;
+  padding: 1.25rem;
+  width: var(--width-card);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  position: relative;
+}
+
+#items h3 {
+    line-height: var(--line-height);
+}
+
+#items aside p {
+  margin: 0.75rem 0;
+  padding: 0;
+  width: auto;
+}
+
+#items .item-cart {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}
+
+section#items img {
+    max-width: 100%;
+}
+
+#items main {
+  margin: 0 auto;
+  max-width: var(--width-content);
+  padding: 3rem 1rem;
+}
+
+section#items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: var(--justify-important);
+}

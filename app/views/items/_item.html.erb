@@ -1,0 +1,39 @@
+<aside>
+  <% if item.picture.present? %>
+    <% if (params[:action] == 'index' || params[:action] == 'search') %>
+      <p><%= image_tag item.picture.variant(resize_to_limit: [285, 285]).processed  %></p>
+    <% else %>
+      <p><%= image_tag item.picture.variant(resize_to_limit: [600, 600]).processed  %></p>
+    <% end %>
+  <% end %>
+  <% if (params[:action] == 'show') %>
+    <p><%= item.description %></p>
+  <% end %>
+  <% if (params[:action] == 'index' || params[:action] == 'search') %>
+    <h3 style="font-size:20px;"><%= link_to item.title, item %></h3>
+  <% else %>
+    <h3><%= link_to item.title, item %></h3>
+  <% end %>
+
+  <% if (params[:action] == 'show') %>
+    <p><%= item.description %></p>
+  <% end %>
+  <p>Price: <%= number_to_currency item.price / 100.0 %></p>
+
+  <% if (params[:action] != 'show') %>
+    <% if cart.include?(item) %>
+      <%= link_to "Remove From Cart", cart_path(item), method: :delete, class: "btn btn-danger" %>
+    <% else %>
+      <%= form_with url: cart_index_path, method: :post do %>
+        <%= hidden_field_tag(:id, item.id) %>
+        <%= hidden_field_tag(:title, item.title) %>
+        <%= button_tag class: "btn btn-warning item-cart" do %>
+          <i class="bi bi-cart2" style="font-size:30px;"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= button_to item, method: :get, class: "btn btn-primary" do %>
+      View Item
+    <% end %>
+  <% end %>
+</aside>
