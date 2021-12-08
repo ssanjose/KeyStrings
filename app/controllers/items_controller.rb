@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @items = Item.all
+    @items = Item.all.page(params[:page])
   end
 
   def show
@@ -14,7 +14,8 @@ class ItemsController < ApplicationController
       redirect_to root_path and return
     else
       @parameter = params[:search].downcase
-      @items = Item.all.where("lower(title) LIKE :search", search: "%#{@parameter}%")
+      @items = Item.all.where("lower(title) LIKE :search",
+                              search: "%#{@parameter}%").page(params[:page])
     end
   end
 end

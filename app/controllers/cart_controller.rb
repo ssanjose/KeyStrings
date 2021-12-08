@@ -2,7 +2,8 @@ class CartController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @items = Item.find(session[:shopping_cart])
+    @items = Kaminari.paginate_array(Item.find(session[:shopping_cart])).page(params[:page]).per(10)
+    render "items/index"
   end
 
   # POST /cart
