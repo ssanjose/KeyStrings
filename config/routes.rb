@@ -9,12 +9,18 @@ Rails.application.routes.draw do
 
   devise_for :users,
              path:        "auth",
-             controllers: { sessions: "users/sessions", registrations: "users/registrations" },
-             path_names:  { registration: "register" }
+             controllers: { sessions: "users/sessions", registrations: "users/registrations" }
 
   root to: "main#index"
 
   get "/about", to: "about#index"
+
+  get "/items/search", to: "items#search"
+  resources :items, only: %i[index show]
+
+  resources :categories, only: %i[index show]
+
+  resources :cart, only: %i[index create destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
