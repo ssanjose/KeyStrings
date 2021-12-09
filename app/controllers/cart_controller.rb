@@ -3,7 +3,7 @@ class CartController < ApplicationController
 
   def index
     @items = Kaminari.paginate_array(Item.find(session[:shopping_cart])).page(params[:page]).per(10)
-    render "items/index"
+    render "items/index" and return
   end
 
   # POST /cart
@@ -15,7 +15,7 @@ class CartController < ApplicationController
     session[:shopping_cart] << id
 
     flash[:notice] = "#{title} added to cart!"
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 
   # DELETE /cart/:id
@@ -23,6 +23,6 @@ class CartController < ApplicationController
     id = params[:id].to_i
     session[:shopping_cart].delete(id)
     flash[:notice] = " #{Item.find(id).title} removed from cart."
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 end

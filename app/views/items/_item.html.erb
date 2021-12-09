@@ -6,9 +6,6 @@
       <p><%= image_tag item.picture.variant(resize_to_limit: [600, 600]).processed  %></p>
     <% end %>
   <% end %>
-  <% if (params[:action] == 'show') %>
-    <p><%= item.description %></p>
-  <% end %>
   <% if (params[:action] == 'index' || params[:action] == 'search') %>
     <h3 style="font-size:20px;"><%= link_to item.title, item %></h3>
   <% else %>

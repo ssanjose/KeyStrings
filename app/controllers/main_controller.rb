@@ -3,6 +3,6 @@ class MainController < ApplicationController
 
   def index
     @items = Item.all.page(params[:page])
-    render "items/index"
+    render "items/index" and return
   end
 end
