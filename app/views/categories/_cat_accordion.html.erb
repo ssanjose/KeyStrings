@@ -1,0 +1,35 @@
+<div class="accordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Pick Categories
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <%= form_with url: categories_filter_path, remote: true, class: "btn-group-vertical", role: "group",
+          'aria-label': "Basic checkbox toggle button group", method: :post do %>
+          <% if @picks.count > 0 %>
+            <%= link_to "Reset Selections", categories_destroy_picks_path, method: :post, class: "btn btn-danger" %>
+          <% end %>
+          <%= button_tag class: "btn btn-warning item-cart" do %>
+            Confirm
+          <% end %>
+          <%= render @categories %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Filter List
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        Filter Lists
+      </div>
+    </div>
+  </div>
+</div>

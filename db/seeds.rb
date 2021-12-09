@@ -35,12 +35,11 @@ categories = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 categories.each do |c|
   Category.create(title: c["title"])
 
-  query = URI.encode_www_form_component([c.title, "picture"].join(","))
+  query = URI.encode_www_form_component([c.title, "image"].join(","))
   downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{query}")
   c.image.attach(io:       downloaded_image,
                  filename: "item-#{[c.title, 'picture'].join('-')}.jpg")
-  sleep(1) # <=== if youre downloading A LOT of images,
-  # do yourself a favour and DONT get yourself blocked by spamming the API.
+  sleep(1)
 end
 
 # Load items

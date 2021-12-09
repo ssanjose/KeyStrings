@@ -3,7 +3,7 @@ class CartController < ApplicationController
 
   def index
     @items = Kaminari.paginate_array(Item.find(session[:shopping_cart])).page(params[:page]).per(10)
-    render "items/index"
+    render "items/index" and return
   end
 
   # POST /cart

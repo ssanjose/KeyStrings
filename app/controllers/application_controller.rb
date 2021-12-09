@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, prepend: true
 
   before_action :authenticate_user!
-  before_action :init_session
+  before_action :init_session, :picks
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :current_admin_user, :visit_count, :cart
@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   # -------------------[ Sessions ]-----------------------
   def init_session
     session[:shopping_cart] ||= []
+    session[:picked_categories] ||= []
   end
 
   def cart
@@ -28,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   def visit_count
     session[:visit_count]
+  end
+
+  def picks
+    @picks = Category.find(session[:picked_categories])
   end
   # -------------------[ Sessions ]-----------------------
 

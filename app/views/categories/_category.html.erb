@@ -1,0 +1,7 @@
+<%= hidden_field_tag(:id, category.id) %>
+<%= label_tag "#{category.title.underscore}", "#{category.title}", class: "btn btn-outline-primary" %>
+<% if @picks.include?(category.id)%>
+  <%= check_box_tag "#{category.title.underscore}", 0, true %>
+<% else %>
+  <%= check_box_tag "#{category.title.underscore}", 1, false %>
+<% end %>
