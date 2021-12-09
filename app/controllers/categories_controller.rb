@@ -5,13 +5,12 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    @items = Item.all.page(params[:page])
 
     if session[:picked_categories].count > 0
-      @items = Kaminari.paginate_array(@items.where(category_id: session[:picked_categories])).page(params[:page])
+      @items = Kaminari.paginate_array(Item.all.where(category_id: session[:picked_categories])).page(params[:page])
+    else
+      @items = Item.all.page(params[:page])
     end
-
-    render action: "index" and return
   end
 
   def show
@@ -21,7 +20,6 @@ class CategoriesController < ApplicationController
   def search
     session[:picked_categories] << params[:id].to_i
 
-    logger.debug(session[:picked_categories].to_s)
     redirect_to categories_path and return
   end
 

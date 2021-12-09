@@ -7,14 +7,12 @@
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <%= form_with url: categories_filter_path, remote: true, class: "btn-group-vertical", role: "group",
-          'aria-label': "Basic checkbox toggle button group", method: :post do %>
           <% if @picks.count > 0 %>
-            <%= link_to "Reset Selections", categories_destroy_picks_path, method: :post, class: "btn btn-danger" %>
+            <%= link_to "Reset", categories_destroy_picks_path, method: :delete, class: "btn btn-danger",
+              style: "display:block;" %>
           <% end %>
-          <%= button_tag class: "btn btn-warning item-cart" do %>
-            Confirm
-          <% end %>
+        <%= form_with local: true, class: "btn-group-vertical", role: "group",
+          'aria-label': "Basic checkbox toggle button group", id: "cat_filter" do %>
           <%= render @categories %>
         <% end %>
       </div>

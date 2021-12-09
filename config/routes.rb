@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   get "/items/search", to: "items#search"
   resources :items, only: %i[index show]
 
-  post "/categories/filter", to: "categories#search"
-  post "/categories/destroy_picks", to: "categories#destroy_picks"
+  post "/categories/filter/:id", to: "categories#search"
+  delete "/categories/destroy_picks", to: "categories#destroy_picks"
   resources :categories, only: %i[index show]
 
   resources :cart, only: %i[index create destroy]

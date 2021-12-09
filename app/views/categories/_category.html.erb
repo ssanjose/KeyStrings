@@ -1,7 +1,10 @@
-<%= hidden_field_tag(:id, category.id) %>
-<%= label_tag "#{category.title.underscore}", "#{category.title}", class: "btn btn-outline-primary" %>
-<% if @picks.include?(category.id)%>
-  <%= check_box_tag "#{category.title.underscore}", 0, true %>
-<% else %>
-  <%= check_box_tag "#{category.title.underscore}", 1, false %>
-<% end %>
+<div style="display:flex;">
+  <%= label_tag "#{category.title.underscore}", "#{category.title}" %>
+  <% if @picks.include?(category.id)%>
+    <%= check_box_tag "#{category.title.underscore}", 0, true, class: "category_check",
+      data: { url: "/categories/filter/#{category.id}", remote: true, method: :post } %>
+  <% else %>
+    <%= check_box_tag "#{category.title.underscore}", 1, false, class: "category_check",
+      data: { url: "/categories/filter/#{category.id}", remote: true, method: :post } %>
+  <% end %>
+</div>

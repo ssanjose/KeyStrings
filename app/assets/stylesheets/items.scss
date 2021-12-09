@@ -49,3 +49,7 @@ section#items {
   flex-wrap: wrap;
   justify-content: var(--justify-important);
 }
+
+#cart-div {
+  height: max-content;
+}

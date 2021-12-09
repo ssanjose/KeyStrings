@@ -15,7 +15,7 @@ class CartController < ApplicationController
     session[:shopping_cart] << id
 
     flash[:notice] = "#{title} added to cart!"
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 
   # DELETE /cart/:id
@@ -23,6 +23,6 @@ class CartController < ApplicationController
     id = params[:id].to_i
     session[:shopping_cart].delete(id)
     flash[:notice] = " #{Item.find(id).title} removed from cart."
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 end

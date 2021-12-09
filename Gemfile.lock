@@ -301,6 +301,7 @@ DEPENDENCIES
   devise
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  jquery-rails
   kaminari
   listen (~> 3.3)
   pg
