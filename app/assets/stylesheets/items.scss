@@ -50,6 +50,19 @@ section#items {
   justify-content: var(--justify-important);
 }
 
-#cart-div {
+#item-show-card {
   height: max-content;
 }
+
+#item-show-card #product-details {
+
+  padding: 32px 24px;
+  background-color: #f4f6f9;
+  border-radius: 4px;
+}
+
+#item-show-card > p {
+  font-size: 32px;
+  line-height: 1;
+}
+

@@ -12,6 +12,6 @@ class User < ApplicationRecord
   validates :phone, numericality: true, length: { minimum: 10, maximum: 15 }
 
   def admin?
-    :admin == true
+    admin == true
   end
 end

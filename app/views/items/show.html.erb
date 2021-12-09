@@ -1,8 +1,8 @@
 <section class="container" style="display:flex;">
-  <div class="col-9">
+  <div class="col-8">
     <%= render @item %>
   </div>
-  <div class="col-2">
-    <%= render partial: 'item_buy'%>
+  <div class="col-4">
+    <%= render partial: 'item_buy', locals: { item: @item }%>
   </div>
 </section>

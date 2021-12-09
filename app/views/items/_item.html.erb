@@ -9,13 +9,22 @@
   <% if (params[:action] == 'index' || params[:action] == 'search') %>
     <h3 style="font-size:20px;"><%= link_to item.title, item %></h3>
   <% else %>
-    <h3><%= link_to item.title, item %></h3>
+    <h3>
+      <% if (params[:action] != 'show') %>
+        <%= link_to item.title, item %>
+      <% else %>
+        <%= item.title%>
+      <% end %>
+    </h3>
+
   <% end %>
 
   <% if (params[:action] == 'show') %>
+    <hr />
     <p><%= item.description %></p>
+  <% else %>
+    <p>Price: <%= number_to_currency item.price / 1.0 %></p>
   <% end %>
-  <p>Price: <%= number_to_currency item.price / 100.0 %></p>
 
   <% if (params[:action] != 'show') %>
     <% if cart.include?(item) %>

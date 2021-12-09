@@ -5,17 +5,31 @@ class ApplicationController < ActionController::Base
   before_action :init_session, :picks
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :current_admin_user, :visit_count, :cart
+  helper_method :current_admin_user, :visit_count, :cart, :access_denied, :current_user,
+                :authenticate_admin_user
 
   def access_denied(exception)
+    logger.debug("access_denied")
     redirect_to root_path, alert: exception.message
   end
 
   def current_admin_user
-    @current_admin_user ||= AdminUser.find(session[:user_id]) if session[:user_id]
+    logger.debug("current_admin_user!")
+    logger.debug("#{current_user}!")
+    if user_session
+      @current_admin_user = AdminUser.find_by(email: current_user.email)
+      logger.debug(@current_admin_user) if @current_admin_user
+    end
+
+    @current_admin_user
   end
 
-  def authenticate_admin_user!; end
+  def authenticate_admin_user!
+    logger.debug("authenticate_admin_user")
+    logger.debug(current_user.email.to_s + "dasdasd")
+    return false unless current_user.admin?
+    true
+  end
 
   # -------------------[ Sessions ]-----------------------
   def init_session
