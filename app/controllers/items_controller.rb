@@ -11,11 +11,19 @@ class ItemsController < ApplicationController
 
   def search
     if params[:search].blank?
+      session[:search] = nil
       redirect_to root_path and return
     else
-      @parameter = params[:search].downcase
-      @items = Item.all.where("lower(title) LIKE :search",
-                              search: "%#{@parameter}%").page(params[:page])
+      session[:search] = params[:search].downcase
+      redirect_to categories_path and return
     end
+
+    # if params[:search].blank?
+    #   redirect_to root_path and return
+    # else
+    #   @parameter = params[:search].downcase
+    #   @items = Item.all.where("lower(title) LIKE :search",
+    #                           search: "%#{@parameter}%").page(params[:page])
+    # end
   end
 end

@@ -39,3 +39,14 @@
   --width-card-wide: 800px;
   --width-content: 1080px;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > nav {
+  display: inline-block;
+  width: fit-content;
+}

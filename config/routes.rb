@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   delete "/categories/destroy_picks", to: "categories#destroy_picks"
   resources :categories, only: %i[index show]
 
+  post "/cart/buy", to: "cart#buy"
   resources :cart, only: %i[index create destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

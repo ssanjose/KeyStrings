@@ -1,3 +1,28 @@
 // Place all the styles related to the Cart controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#carts {
+  width: 100%;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.cart-item {
+  border: 1px solid var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow) var(--color-shadow);
+  padding: 1.25rem;
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cart-item img {
+  min-width: 200px;
+  width: 100%;
+  max-width: 400px;
+}

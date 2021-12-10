@@ -1,3 +1,10 @@
-<section id="carts">
-  <%= render @items %>
-</section>
+
+
+<div id="carts" class="container mb-5" style="display:flex;">
+  <div class="col-9">
+    <%= render partial: "cart", collection: @carts %>
+  </div>
+  <div class="col-3">
+    dasdasdasd
+  </div>
+</div>
