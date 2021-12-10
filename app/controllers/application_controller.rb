@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :current_admin_user, :visit_count, :cart, :access_denied, :current_user,
-                :authenticate_admin_user, :add_qty, :minus_qty
+                :authenticate_admin_user
 
   def access_denied(exception)
     logger.debug("access_denied")
@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
   # -------------------[ Sessions ]-----------------------
   def init_session
     session[:picked_categories] ||= []
+    session[:shopping_cart] ||= []
   end
 
   def cart
@@ -53,18 +54,6 @@ class ApplicationController < ActionController::Base
 
   def picks
     @picks = Category.find(session[:picked_categories])
-  end
-
-  def add_qty(id)
-    session[:shopping_cart].each do |item|
-      item["qty"] += 1 if item["id"] == id
-    end
-  end
-
-  def minus_qty(id)
-    session[:shopping_cart].each do |item|
-      item["qty"] -= 1 if item["id"] == id
-    end
   end
   # -------------------[ Sessions ]-----------------------
 

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   resources :categories, only: %i[index show]
 
   post "/cart/buy", to: "cart#buy"
+  post "/cart/add/qty/:id", to: "cart#add"
+  post "/cart/subtract/qty/:id", to: "cart#subtract"
   resources :cart, only: %i[index create destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

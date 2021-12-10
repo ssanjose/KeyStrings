@@ -4,13 +4,16 @@
   <% end %>
   <h3><%= cart.title %></h3>
 
-  <%= link_to "#", onclick: "add_qty(#{cart.id})" do %>
-    <i class="bi bi-plus-lg" style="font-size:20px;"></i>
-  <% end %>
-  <%= (session[:shopping_cart].select {|i| i["id"]==cart.id})[0]["qty"].to_s %>
-  <%= link_to "#", onclick: "minus_qty(#{cart.id})" do %>
-    <i class="bi bi-dash-lg" style="font-size:20px;"></i>
-  <% end %>
+  <div class="d-flex mb-3">
+    <%= button_to "/cart/add/qty/#{cart.id}", method: :post, class: "btn btn-primary" do %>
+      <i class="bi bi-plus-lg" style="font-size:15px;"></i>
+    <% end %>
+    <%= (session[:shopping_cart].select {|i| i["id"]==cart.id})[0]["qty"].to_s %>
+    <%= button_to "/cart/subtract/qty/#{cart.id}", method: :post, class: "btn btn-primary" do %>
+      <i class="bi bi-dash-lg" style="font-size:15px;"></i>
+    <% end %>
+
+  </div>
 
   <%= link_to "Remove From Cart", cart_path(cart), method: :delete, class: "btn btn-danger" %>
 
