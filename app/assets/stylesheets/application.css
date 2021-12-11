@@ -50,3 +50,7 @@ main > nav {
   display: inline-block;
   width: fit-content;
 }
+
+.container {
+  padding: 0;
+}

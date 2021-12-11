@@ -1,0 +1,32 @@
+<div id="cart-summary">
+  <h3><strong>Order Summary</strong></h3>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>Order Subtotal</th>
+          <td><%= number_to_currency @order_sub.sum / 1.0 if @order_sub != nil %></td>
+        </tr>
+        <tr>
+          <th>Shipping Costs</th>
+          <td>Free</td>
+        </tr>
+        <% if current_user and @order_sub != nil %>
+        <tr>
+          <th>Estimated Taxes</th>
+          <td><%= number_to_currency @order_taxes / 1.0 %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th><strong>Estimated Total</strong></th>
+          <td><strong><%= number_to_currency (current_user and @order_sub!= nil ? @order_total : @order_sub.sum) / 1.0 %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%= link_to "Proceed to Checkout", cart_path(cart), method: :post, class: "btn btn-warning d-inline-block w-100" %>
+</div>

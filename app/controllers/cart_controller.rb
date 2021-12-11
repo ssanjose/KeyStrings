@@ -2,13 +2,22 @@ class CartController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
+    @order_sub = 0
     @carts = if session[:shopping_cart].count.positive?
-               Kaminari.paginate_array(Item.find(session[:shopping_cart].map do |item|
-                                                   item["id"]
-                                                 end)).page(params[:page])
+               Item.find(session[:shopping_cart].map { |item| item["id"] })
              else
                []
              end
+
+    if @carts.count.positive? || @carts != []
+      @qty_array = session[:shopping_cart].map { |item| item["qty"].to_i }
+
+      @order_sub = (@carts.map.with_index { |item, index| item.price * @qty_array[index].to_i })
+      if current_user
+        @order_taxes = @order_sub.sum * (current_user.province.gst + current_user.province.pst)
+      end
+      @order_total = @order_sub.sum + @order_taxes if current_user
+    end
 
     render "cart/index" and return
   end
