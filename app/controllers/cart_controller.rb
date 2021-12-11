@@ -2,7 +2,7 @@ class CartController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @order_sub = 0
+    @order_sub = []
     @carts = if session[:shopping_cart].count.positive?
                Item.find(session[:shopping_cart].map { |item| item["id"] })
              else

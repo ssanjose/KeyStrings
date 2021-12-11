@@ -13,12 +13,16 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    cart = session[:shopping_cart]
     super
+    session[:shopping_cart] = cart
   end
 
   # DELETE /resource/sign_out
   def destroy
+    cart = session[:shopping_cart]
     super
+    session[:shopping_cart] = cart
   end
 
   # protected

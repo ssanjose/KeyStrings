@@ -5,17 +5,17 @@
       <tbody>
         <tr>
           <th>Order Subtotal</th>
-          <td><%= number_to_currency @order_sub.sum / 1.0 if @order_sub != nil %></td>
+          <td><%= number_to_currency @order_sub.count.positive? ? (@order_sub.sum / 1.0) : 0  %></td>
         </tr>
         <tr>
           <th>Shipping Costs</th>
           <td>Free</td>
         </tr>
-        <% if current_user and @order_sub != nil %>
-        <tr>
-          <th>Estimated Taxes</th>
-          <td><%= number_to_currency @order_taxes / 1.0 %></td>
-        </tr>
+        <% if current_user and @order_sub != [] %>
+          <tr>
+            <th>Estimated Taxes</th>
+            <td><%= number_to_currency (@order_taxes) %></td>
+          </tr>
         <% end %>
       </tbody>
     </table>
@@ -23,10 +23,15 @@
       <tbody>
         <tr>
           <th><strong>Estimated Total</strong></th>
-          <td><strong><%= number_to_currency (current_user and @order_sub!= nil ? @order_total : @order_sub.sum) / 1.0 %></strong></td>
+          <td><strong><%= number_to_currency (current_user and @order_sub.count.positive? ? @order_total : @order_sub.sum) %></strong></td>
         </tr>
       </tbody>
     </table>
   </div>
-  <%= link_to "Proceed to Checkout", cart_path(cart), method: :post, class: "btn btn-warning d-inline-block w-100" %>
+  <%= link_to_unless((current_user.nil? or !@order_sub.count.positive?), "Proceed to Checkout", { controller: "cart", action: "create" }, class: "btn btn-warning d-inline-block w-100") do |name|
+      button_to("Proceed to Checkout", { controller: "cart", action: "buy" }, disabled: true, class: "btn btn-warning d-inline-block w-100")
+  end %>
+  <%= link_to_if(current_user.nil?, "Login", { controller: "users/sessions", action: "create" }, class: "btn btn-primary d-inline-block w-100 mt-2") do
+    ""
+  end %>
 </div>
