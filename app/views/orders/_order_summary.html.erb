@@ -11,12 +11,14 @@
           <th>Shipping Costs</th>
           <td>Free</td>
         </tr>
-        <% if current_user and @order_sub != [] %>
-          <tr>
-            <th>Estimated Taxes</th>
-            <td><%= number_to_currency (@order_taxes) %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <th>PST</th>
+          <td><%= number_to_currency (@order_pst) %></td>
+        </tr>
+        <tr>
+          <th>GST/HST</th>
+          <td><%= number_to_currency (@order_gst) %></td>
+        </tr>
       </tbody>
     </table>
     <table class="table">
@@ -28,12 +30,20 @@
       </tbody>
     </table>
   </div>
-  <% if current_user and @order_sub.count.positive? %>
-    <%= link_to("Proceed to Checkout", order_review_path, class: "btn btn-warning d-inline-block w-100") %>
-  <% else %>
-    <%= button_to("Proceed to Checkout", order_review_path, disabled: true, class: "btn btn-warning d-inline-block w-100") %>
+  <%= form_tag(orders_path, method: "post") do |f| %>
+    <%= hidden_field_tag(:qty_array, @qty_array) %>
+    <%= hidden_field_tag(:order_sub, @order_sub) %>
+    <%= hidden_field_tag(:price, @order_total) %>
+    <%= hidden_field_tag(:pst, @order_pst) %>
+    <%= hidden_field_tag(:gst, @order_gst) %>
+    <%= hidden_field_tag(:price, @order_total) %>
+    <%= hidden_field_tag(:running, false) %>
+
+    <%= button_tag "Submit Order", type: "submit", class: "btn btn-warning d-inline-block w-100 mb-2"%>
   <% end %>
-  <%= link_to_if(current_user.nil?, "Login", { controller: "users/sessions", action: "create" }, class: "btn btn-primary d-inline-block w-100 mt-2") do
-    ""
-  end %>
 </div>
+
+
+
+
+

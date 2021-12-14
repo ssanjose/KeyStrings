@@ -3,6 +3,5 @@ class Order < ApplicationRecord
   belongs_to :discount
   has_many   :order_histories
 
-  validates :taxes, :price, :created, presence: true
-  validates :price, numericality: true
+  validates :pst, :gst, :price, presence: true, numericality: true
 end

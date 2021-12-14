@@ -13,6 +13,7 @@ User.delete_all
 Item.delete_all
 Province.delete_all
 Category.delete_all
+Discount.delete_all
 
 # Load provinces
 filename = Rails.root.join("db/provinces.csv")
@@ -34,12 +35,6 @@ csv_data = File.read(filename)
 categories = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 categories.each do |c|
   Category.create(title: c["title"])
-
-  query = URI.encode_www_form_component([c.title, "image"].join(","))
-  downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{query}")
-  c.image.attach(io:       downloaded_image,
-                 filename: "item-#{[c.title, 'picture'].join('-')}.jpg")
-  sleep(1)
 end
 
 # Load items
@@ -68,12 +63,15 @@ items.each do |i|
   # do yourself a favour and DONT get yourself blocked by spamming the API.
 end
 
-puts "Created #{Province.count} Provinces"
-puts "Created #{Category.count} Categories"
-puts "Created #{Item.count} Items"
+Discount.create(title: "Normal", discount: 0.0, from: Date.new, till: Date.new)
 
 AdminUser.create!(email: "admin@example.com", password: "password",
                   password_confirmation: "password")
 
 User.create!(name: "Admin", email: "admin@example.com", phone: 2_042_222_222, province_id: Province.first.id, admin: true, password: "password",
              password_confirmation: "password")
+
+puts "Created #{Province.count} Provinces"
+puts "Created #{Category.count} Categories"
+puts "Created #{Item.count} Items"
+puts "Created #{Discount.count} Discount"

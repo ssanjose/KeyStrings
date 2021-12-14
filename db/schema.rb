@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
     t.date "created", null: false
     t.decimal "price", null: false
     t.integer "user_id", null: false
-    t.integer "discount_id", null: false
+    t.integer "discount_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "pst", null: false

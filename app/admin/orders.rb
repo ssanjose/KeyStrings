@@ -4,7 +4,7 @@ ActiveAdmin.register Order do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :running, :created, :price, :user_id, :discount_id, :taxes
+  permit_params :running, :created, :price, :user_id, :discount_id, :pst, :gst
 
   form do |f|
     f.semantic_errors

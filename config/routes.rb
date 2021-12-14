@@ -27,5 +27,8 @@ Rails.application.routes.draw do
   post "/cart/subtract/qty/:id", to: "cart#subtract"
   resources :cart, only: %i[index create destroy]
 
+  get "/order/review", to: "orders#review"
+  resources :orders, only: %i[index create show]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
