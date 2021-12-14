@@ -1,0 +1,49 @@
+<div id="cart-summary">
+  <h3><strong>Order Summary</strong></h3>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>Order Subtotal</th>
+          <td><%= number_to_currency @order_sub.count.positive? ? (@order_sub.sum / 1.0) : 0  %></td>
+        </tr>
+        <tr>
+          <th>Shipping Costs</th>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <th>PST</th>
+          <td><%= number_to_currency (@order_pst) %></td>
+        </tr>
+        <tr>
+          <th>GST/HST</th>
+          <td><%= number_to_currency (@order_gst) %></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th><strong>Estimated Total</strong></th>
+          <td><strong><%= number_to_currency (current_user and @order_sub.count.positive? ? @order_total : @order_sub.sum) %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%= form_tag(orders_path, method: "post") do |f| %>
+    <%= hidden_field_tag(:qty_array, @qty_array) %>
+    <%= hidden_field_tag(:order_sub, @order_sub) %>
+    <%= hidden_field_tag(:price, @order_total) %>
+    <%= hidden_field_tag(:pst, @order_pst) %>
+    <%= hidden_field_tag(:gst, @order_gst) %>
+    <%= hidden_field_tag(:price, @order_total) %>
+    <%= hidden_field_tag(:running, false) %>
+
+    <%= button_tag "Submit Order", type: "submit", class: "btn btn-warning d-inline-block w-100 mb-2"%>
+  <% end %>
+</div>
+
+
+
+
+

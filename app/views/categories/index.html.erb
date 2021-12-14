@@ -1,4 +1,4 @@
-<div class="container" style="display:flex;">
+<div class="container mb-5" style="display:flex;">
   <div class="col-3">
     <%= render partial: "categories/cat_accordion" %>
   </div>
@@ -6,3 +6,4 @@
     <%= render template: 'items/index' %>
   </div>
 </div>
+<%= paginate @items %>

@@ -1,19 +1,23 @@
-<aside>
-  <% if item.picture.present? %>
-    <% if (params[:action] == 'index' || params[:action] == 'search') %>
-      <p><%= image_tag item.picture.variant(resize_to_limit: [285, 285]).processed  %></p>
-    <% else %>
-      <p><%= image_tag item.picture.variant(resize_to_limit: [600, 600]).processed  %></p>
-    <% end %>
-  <% end %>
-  <% if (params[:action] == 'show') %>
-    <p><%= item.description %></p>
-  <% end %>
-  <% if (params[:action] == 'index' || params[:action] == 'search') %>
-    <h3 style="font-size:20px;"><%= link_to item.title, item %></h3>
-  <% else %>
-    <h3><%= link_to item.title, item %></h3>
+<div class="cart-item">
+  <% if cart.picture.present? %>
+      <p><%= image_tag cart.picture.variant(resize_to_limit: [250, 250]).processed  %></p>
   <% end %>
 
-  <p>Price: <%= number_to_currency item.price / 100.0 %></p>
-</aside>
+  <div class="d-flex ms-3">
+    <hr/>
+    <h5><%= cart.title %></h5>
+    <div class="d-flex mb-3">
+      <%= button_to "/cart/subtract/qty/#{cart.id}", method: :post, class: "btn btn-primary" do %>
+        <i class="bi bi-dash-lg"></i>
+      <% end %>
+      <%= text_field_tag :price, "#{session[:shopping_cart].select {|i| i["id"]==cart.id}[0]["qty"]}", disabled: true, class: "ms-2 me-2" %>
+      <%= button_to "/cart/add/qty/#{cart.id}", method: :post, class: "btn btn-primary" do %>
+        <i class="bi bi-plus-lg"></i>
+      <% end %>
+    </div>
+    <%= link_to "Remove From Cart", cart_path(cart), method: :delete, class: "btn btn-danger" %>
+  </div>
+
+  <p class="price">Price: <%= number_to_currency (cart.price*@qty_array[cart_counter]) / 1.0 %></p>
+</div>
+<br />

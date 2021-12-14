@@ -10,7 +10,9 @@
 
       <div>
       <%= form_tag(items_search_path, method: "get", class: "d-flex", style: "width:auto;position:relative;") do %>
-        <%= search_field_tag :search, params[:search], placeholder: "Search Items", class: "form-control me-2"%>
+
+        <%= search_field_tag :search, params[:search], placeholder: "Search Items", value: "#{session[:search]}", class: "form-control me-2"%>
+
         <%= button_tag "Search", class: "btn btn-outline-success"%>
         <%= link_to cart_index_path, style: "display:flex;" do %>
             <i class="bi bi-cart2" style="font-size:30px;margin-left:5px;padding-right:5px;"></i>

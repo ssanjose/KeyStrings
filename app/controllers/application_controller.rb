@@ -28,17 +28,24 @@ class ApplicationController < ActionController::Base
     logger.debug("authenticate_admin_user")
     logger.debug(current_user.email.to_s + "dasdasd")
     return false unless current_user.admin?
+
     true
   end
 
   # -------------------[ Sessions ]-----------------------
   def init_session
-    session[:shopping_cart] ||= []
     session[:picked_categories] ||= []
+    session[:shopping_cart] ||= []
   end
 
   def cart
-    Item.find(session[:shopping_cart])
+    # session[:shopping_cart] = []
+    session[:shopping_cart] ||= []
+    if session[:shopping_cart].count.positive?
+      Item.find(session[:shopping_cart].map { |item| item["id"] })
+    else
+      []
+    end
   end
 
   def visit_count

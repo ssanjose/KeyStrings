@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_230607) do
+ActiveRecord::Schema.define(version: 2021_12_14_155627) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -72,6 +72,15 @@ ActiveRecord::Schema.define(version: 2021_12_07_230607) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "discounts", force: :cascade do |t|
+    t.string "title", default: "No sale for this week!"
+    t.decimal "discount", default: "0.0"
+    t.date "from"
+    t.date "till"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -80,6 +89,31 @@ ActiveRecord::Schema.define(version: 2021_12_07_230607) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_items_on_category_id"
+  end
+
+  create_table "order_histories", force: :cascade do |t|
+    t.integer "quantity", default: 1, null: false
+    t.decimal "price", null: false
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_order_histories_on_item_id"
+    t.index ["order_id"], name: "index_order_histories_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.boolean "running", default: true, null: false
+    t.date "created", null: false
+    t.decimal "price", null: false
+    t.integer "user_id", null: false
+    t.integer "discount_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "pst", null: false
+    t.decimal "gst", null: false
+    t.index ["discount_id"], name: "index_orders_on_discount_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "provinces", force: :cascade do |t|
@@ -111,5 +145,9 @@ ActiveRecord::Schema.define(version: 2021_12_07_230607) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "categories"
+  add_foreign_key "order_histories", "items"
+  add_foreign_key "order_histories", "orders"
+  add_foreign_key "orders", "discounts"
+  add_foreign_key "orders", "users"
   add_foreign_key "users", "provinces"
 end

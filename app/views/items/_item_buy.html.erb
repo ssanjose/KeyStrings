@@ -14,8 +14,12 @@
         <% end %>
       <% end %>
     <% end %>
-    <%= button_to item, method: :post, class: "btn btn-primary d-inline-block w-100 mb-5" do %>
-      Buy
+    <%= form_with url: cart_buy_path, method: :post do %>
+      <%= hidden_field_tag(:id, item.id) %>
+      <%= hidden_field_tag(:title, item.title) %>
+      <%= button_tag class: "btn btn-primary d-inline-block w-100 mb-5" do %>
+        Buy
+      <% end %>
     <% end %>
   </div>
 </div>

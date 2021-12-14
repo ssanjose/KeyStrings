@@ -1,4 +1,6 @@
-<section id="items">
+<section id="items" class="mb-5">
   <%= render @items %>
 </section>
-<%= paginate @items %>
+<% if (params[:controller] != 'categories') %>
+  <%= paginate @items %>
+<% end %>

@@ -32,7 +32,6 @@
     <% else %>
       <%= form_with url: cart_index_path, method: :post do %>
         <%= hidden_field_tag(:id, item.id) %>
-        <%= hidden_field_tag(:title, item.title) %>
         <%= button_tag class: "btn btn-warning item-cart" do %>
           <i class="bi bi-cart2" style="font-size:30px;"></i>
         <% end %>
