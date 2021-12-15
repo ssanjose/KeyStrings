@@ -2,10 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-#carts {
+#carts, #orders-summary {
   width: 100%;
   justify-content: space-between;
   margin: 0;
+}
+
+#orders-summary {
+  background-color: #eaeaea;
+  margin: 0;
+  padding: 0.2rem 1rem 1rem 1rem;
 }
 
 #carts .col-4 {
@@ -34,6 +40,17 @@
   align-items: flex-start;
 
   position: relative;
+}
+
+#orders-summary li {
+  border: 1px solid var(--color-bg-secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow) var(--color-shadow);
+  padding: 1.25rem;
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  list-style-type: none;
+  background-color: white;
 }
 
 .cart-item img {

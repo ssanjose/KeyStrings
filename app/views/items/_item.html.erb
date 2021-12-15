@@ -1,9 +1,9 @@
 <aside>
   <% if item.picture.present? %>
     <% if (params[:action] == 'index' || params[:action] == 'search') %>
-      <p><%= image_tag item.picture.variant(resize_to_limit: [285, 285]).processed  %></p>
+      <p><%= image_tag item.picture.variant(resize_to_limit: [285, 285]).processed, alt: "#{item.title}"  %></p>
     <% else %>
-      <p><%= image_tag item.picture.variant(resize_to_limit: [600, 600]).processed  %></p>
+      <p><%= image_tag item.picture.variant(resize_to_limit: [600, 600]).processed, alt: "#{item.title}"  %></p>
     <% end %>
   <% end %>
   <% if (params[:action] == 'index' || params[:action] == 'search') %>

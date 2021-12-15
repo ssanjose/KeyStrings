@@ -1,0 +1,16 @@
+<div style="display:flex;flex-wrap:wrap;">
+  <div class="col-3">
+    <% if order_item.item.picture.present? %>
+      <p><%= image_tag order_item.item.picture.variant(resize_to_limit: [235, 235]).processed, alt: "#{order_item.item.title}"  %></p>
+    <% end %>
+  </div>
+  <div class="col-9">
+    <h2><%= order_item.item.title %></h2>
+    <p><%= ("Quantity: #{order_item.quantity.to_s}") %> </p>
+
+    <%= button_to order_item.item, method: :get, class: "btn btn-primary" do %>
+      View Item
+    <% end %>
+  </div>
+</div>
+<hr />

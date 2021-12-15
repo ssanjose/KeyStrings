@@ -61,7 +61,10 @@ class CartController < ApplicationController
 
   def subtract
     session[:shopping_cart].each do |item|
-      item["qty"] -= 1 if item["id"].to_i == params[:id].to_i
+      next unless item["id"].to_i == params[:id].to_i
+
+      item["qty"] -= 1
+      session[:shopping_cart].delete(item) if item["qty"] < 1
     end
     redirect_back(fallback_location: root_path)
   end

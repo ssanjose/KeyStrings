@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
-  def index; end
+  def index
+    @orders = current_user.orders
+  end
 
   def create
     puts "start order create"
@@ -36,10 +38,14 @@ class OrdersController < ApplicationController
     end
 
     flash[:notice] = "Order created!"
+    session[:shopping_cart] = []
+
     redirect_to root_path
   end
 
-  def show; end
+  def show
+    @order = Order.find(params[:id])
+  end
 
   def review
     @order_sub = []

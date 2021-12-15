@@ -39,6 +39,9 @@
               <li class="nav-item">
                 <%= link_to"Account", edit_user_registration_path(@user), class: "nav-link" %>
               </li>
+              <li class="nav-item">
+                <%= link_to "Orders",  orders_path, class: "nav-link" %>
+              </li>
             <% end %>
 
             <li class="nav-item">
@@ -54,6 +57,7 @@
                 Shop
               </a>
               <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                <li>
                   <%= link_to "Browse Categories", categories_path, class: "dropdown-item" %>
                 </li>
                 <li><a class="dropdown-item" href="#">Order Custom Keyboards</a></li>

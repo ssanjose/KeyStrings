@@ -17,7 +17,7 @@ services:
     networks:
       - development
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: ssanjose
       POSTGRES_PASSWORD: password
   web:
     build:

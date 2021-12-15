@@ -1,0 +1,15 @@
+<li>
+  <h2><%= ("Order at " + order.created_at.to_s )%></h2>
+
+  <p>Items Ordered: <%= order.order_histories.count %></p>
+
+  <% if (params[:action] == 'show') %>
+    <hr />
+    <%= render partial: "order_item", collection: order.order_histories %>
+  <% end %>
+  <p>Price: <%= number_to_currency order.price %></p>
+
+  <% if (params[:action] != 'show') %>
+    <%= link_to "View Order", order, method: :get, class: "btn btn-primary"%>
+  <% end %>
+</li>

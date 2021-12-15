@@ -1,6 +1,6 @@
 <div class="cart-item">
   <% if cart.picture.present? %>
-      <p><%= image_tag cart.picture.variant(resize_to_limit: [250, 250]).processed  %></p>
+      <p><%= image_tag cart.picture.variant(resize_to_limit: [250, 250]).processed, alt: "#{cart.title}"  %></p>
   <% end %>
 
   <div class="d-flex ms-3">

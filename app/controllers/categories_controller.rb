@@ -28,15 +28,6 @@ class CategoriesController < ApplicationController
   def search
     session[:picked_categories] ||= []
     session[:picked_categories] << params[:id].to_i
-
-    logger.debug("search action controller categories!")
-    logger.debug("search action controller categories!")
-    logger.debug("search action controller categories!")
-    logger.debug("search action controller categories!")
-    logger.debug("search action controller categories!")
-    logger.debug("search action controller categories!")
-    logger.debug("search action controller categories!")
-
     redirect_to categories_path and return
   end
 
