@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2021_12_14_155627) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
@@ -29,8 +32,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -49,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -75,8 +78,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
   create_table "discounts", force: :cascade do |t|
     t.string "title", default: "No sale for this week!"
     t.decimal "discount", default: "0.0"
-    t.date "from"
-    t.date "till"
+    t.date "from", default: -> { "CURRENT_DATE" }
+    t.date "till", default: -> { "CURRENT_DATE" }
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -85,7 +88,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
     t.string "title"
     t.text "description"
     t.decimal "price"
-    t.integer "category_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_items_on_category_id"
@@ -94,8 +97,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
   create_table "order_histories", force: :cascade do |t|
     t.integer "quantity", default: 1, null: false
     t.decimal "price", null: false
-    t.integer "order_id", null: false
-    t.integer "item_id", null: false
+    t.bigint "order_id", null: false
+    t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_order_histories_on_item_id"
@@ -104,10 +107,10 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
 
   create_table "orders", force: :cascade do |t|
     t.boolean "running", default: true, null: false
-    t.date "created", null: false
+    t.date "created", default: -> { "CURRENT_DATE" }, null: false
     t.decimal "price", null: false
-    t.integer "user_id", null: false
-    t.integer "discount_id"
+    t.bigint "user_id", null: false
+    t.bigint "discount_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "pst", null: false
@@ -128,7 +131,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_155627) do
     t.string "name"
     t.text "password"
     t.integer "phone"
-    t.integer "province_id", null: false
+    t.bigint "province_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", default: "", null: false

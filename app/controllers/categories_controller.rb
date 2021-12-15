@@ -6,6 +6,7 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
 
+    session[:picked_categories] ||= []
     @items = if session[:search] != "" && session[:picked_categories].count.positive?
                Kaminari.paginate_array(Item.where(category_id: session[:picked_categories])
                                            .where("lower(title) LIKE :search",
@@ -25,7 +26,16 @@ class CategoriesController < ApplicationController
   end
 
   def search
+    session[:picked_categories] ||= []
     session[:picked_categories] << params[:id].to_i
+
+    logger.debug("search action controller categories!")
+    logger.debug("search action controller categories!")
+    logger.debug("search action controller categories!")
+    logger.debug("search action controller categories!")
+    logger.debug("search action controller categories!")
+    logger.debug("search action controller categories!")
+    logger.debug("search action controller categories!")
 
     redirect_to categories_path and return
   end

@@ -1,6 +1,6 @@
 <div style="display:flex;">
   <%= label_tag "#{category.title.underscore}", "#{category.title}" %>
 
-  <%= check_box_tag "#{category.title.underscore}", @picks.include?(category.id), @picks.include?(category.id), class: "category_check",
+  <%= check_box_tag "#{category.title.underscore}", true, @picks.include?(category.id), class: "category_check",
     data: { url: "/categories/filter/#{category.id}", remote: true, method: :post } %>
 </div>

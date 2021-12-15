@@ -4,10 +4,6 @@ class AddDeviseToUsers < ActiveRecord::Migration[6.1]
   def self.up
     change_table :users do |t|
       t.remove :email
-      t.remove :encrypted_password
-      t.remove :reset_password_token
-      t.remove :reset_password_sent_at
-      t.remove :remember_created_at
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

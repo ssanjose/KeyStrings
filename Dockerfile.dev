@@ -1,0 +1,39 @@
+FROM ruby:2.7.1-alpine
+
+ENV APP_PATH /var/app
+ENV BUNDLE_VERSION 2.1.4
+ENV BUNDLE_PATH /usr/local/bundle/gems
+ENV TMP_PATH /tmp/
+ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_PORT 3000
+
+COPY ./dev-docker-entrypoint.sh /usr/local/bin/dev-entrypoint.sh
+RUN chmod +x /usr/local/bin/dev-entrypoint.sh
+
+RUN apk -U add --no-cache \
+  build-base \
+  libxml2-dev \
+  libxslt-dev \
+  postgresql-dev \
+  postgresql-client \
+  nodejs \
+  yarn \
+  libffi-dev \
+  linux-headers \
+  less \
+  imagemagick \
+  git \
+  tzdata \
+  && rm -rf /var/cache/apk/* \
+  && mkdir -p $APP_PATH
+
+RUN gem install bundler --version "$BUNDLE_VERSION" \
+  && rm -rf $GEM_HOME/cache/*
+
+WORKDIR ${APP_PATH}
+
+EXPOSE $RAILS_PORT
+
+ENTRYPOINT [ "bundle", "exec" ]
+
+
